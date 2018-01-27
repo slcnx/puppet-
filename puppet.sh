@@ -1,6 +1,7 @@
 #!/bin/bash
 #
 trap 'exit' INT
+yum -y -d 0 -e 0 install facter
 master_ip=$(facter -p | grep 'ipaddress\>' | awk '{print $3}')
 sed -i "/$master_ip/d" /etc/hosts
 
