@@ -27,6 +27,7 @@ if [ -f ~/.ssh/authorized_keys ]; then
 else
   cat ~/.ssh/id_rsa.pub >> ~/.ssh/authorized_keys && chmod o=--- ~/.ssh/id_rsa.pub
 fi
+hostnamectl set-hostname master.magedu.com
 echo OK
 
 echo -e " master is \033[1;31m$master_ip\033[0m"
@@ -35,7 +36,9 @@ for i in $(seq 0 $[${#IP[@]}-1]); do
 	ssh-copy-id -i ~/.ssh/id_rsa.pub ${IP[$i]} &> /dev/null
 	ssh ${IP[$i]} 'rpm -q epel-release || yum -y install -d 0 -e 0 epel-release' &> /dev/null
 	ssh ${IP[$i]} 'rpm -q facter puppet || yum -y install -d 0 -e 0 facter puppet' &> /dev/null
+	ssh ${IP[$i]} 'hostnamectl set-hostname agent$[$i+1].magedu.com' &> /dev/null
 
 	echo "${IP[$i]} agent$[$i+1].magedu.com a$[$i+1]" >> /etc/hosts
 	echo -e " agent$[$i+1] is \033[1;31m${IP[$i]}\033[0m"
+	
 done
