@@ -1,7 +1,7 @@
 #!/bin/bash
 #
 trap 'exit' INT
-yum -y -d 0 -e 0 install facter
+yum -y -d 0 -e 0 install facter &> /dev/null
 master_ip=$(facter -p | grep 'ipaddress\>' | awk '{print $3}')
 sed -i "/$master_ip/d" /etc/hosts
 
@@ -21,7 +21,7 @@ echo -n "Init master: "
 echo "$master_ip master.magedu.com m" >> /etc/hosts
 rpm -q epel-release &> /dev/null || yum -y -d 0 -e 0 install epel-release &> /dev/null
 rpm -q facter puppet-server &> /dev/null || yum -y -d 0 -e 0 install facter puppet puppet-server &> /dev/null
-[ -f ~/.ssh/id_rsa.pub ] || ssh-keygen -t rsa -b 2048 -f ~/.ssh/id_rsa -P ''
+[ -f ~/.ssh/id_rsa.pub ] || ssh-keygen -t rsa -b 2048 -f ~/.ssh/id_rsa -P '' &> /dev/null
 if [ -f ~/.ssh/authorized_keys ]; then
   grep "$(head -c 17  ~/.ssh/id_rsa.pub)" ~/.ssh/authorized_keys &> /dev/null || cat ~/.ssh/id_rsa.pub >> ~/.ssh/authorized_keys && chmod o=--- ~/.ssh/id_rsa.pub
 else
