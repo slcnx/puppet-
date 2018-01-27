@@ -1,0 +1,2 @@
+mkdir -pv /els/{logs,data}
+chown -R elasticsearch.elasticsearch /els
