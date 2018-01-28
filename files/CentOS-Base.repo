@@ -1,0 +1,59 @@
+[base]
+name=CentOS-$releasever - Base
+failovermethod=priority
+#mirrorlist=http://mirrorlist.centos.org/?release=$releasever&arch=$basearch&repo=os&infra=$infra
+baseurl=http://mirrors.cqu.edu.cn/CentOS/7.4.1708/os/x86_64/
+	http://mirrors.aliyun.com/centos/7.4.1708/os/x86_64/
+	http://mirror.bit.edu.cn/centos/7.4.1708/os/x86_64/
+	http://mirrors.tuna.tsinghua.edu.cn/centos/7.4.1708/os/x86_64/
+	http://mirrors.nwsuaf.edu.cn/centos/7.4.1708/os/x86_64/
+	http://centos.ustc.edu.cn/centos/7.4.1708/os/x86_64/
+	http://mirror.lzu.edu.cn/centos/7.4.1708/os/x86_64/
+	http://mirrors.163.com/centos/7.4.1708/os/x86_64/
+	http://mirrors.cn99.com/centos/7.4.1708/os/x86_64/
+	http://mirrors.shuosc.org/centos/7.4.1708/os/x86_64/
+gpgcheck=1
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-CentOS-$releasever
+enabled=1
+
+[epel]
+name=Fedora EPEL
+failovermethod=priority
+baseurl=http://mirrors.aliyun.com/epel/$releasever/$basearch/
+		http://mirrors.hust.edu.cn/epel/$releasever/$basearch/
+		http://mirrors.sohu.com/fedora-epel/$releasever/$basearch/
+		http://mirrors.cqu.edu.cn/epel/$releasever/$basearch/
+		http://mirror.bit.edu.cn/fedora/epel/$releasever/$basearch/
+		http://mirrors.tuna.tsinghua.edu.cn/epel/$releasever/$basearch/
+		http://centos.ustc.edu.cn/epel/$releasever/$basearch/
+		http://mirror.lzu.edu.cn/epel/$releasever/$basearch/
+		
+gpgcheck=0
+enabled=1
+
+#released updates 
+[updates]
+name=CentOS-$releasever - Updates
+mirrorlist=http://mirrorlist.centos.org/?release=$releasever&arch=$basearch&repo=updates&infra=$infra
+#baseurl=http://mirror.centos.org/centos/$releasever/updates/$basearch/
+gpgcheck=1
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-CentOS-$releasever
+enabled=0
+
+#additional packages that may be useful
+[extra]
+name=CentOS-$releasever - Extras
+mirrorlist=http://mirrorlist.centos.org/?release=$releasever&arch=$basearch&repo=extras&infra=$infra
+#baseurl=http://mirror.centos.org/centos/$releasever/extras/$basearch/
+gpgcheck=1
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-CentOS-$releasever
+enabled=1
+
+#additional packages that extend functionality of existing packages
+[centosplus]
+name=CentOS-$releasever - Plus
+mirrorlist=http://mirrorlist.centos.org/?release=$releasever&arch=$basearch&repo=centosplus&infra=$infra
+#baseurl=http://mirror.centos.org/centos/$releasever/centosplus/$basearch/
+gpgcheck=1
+enabled=0
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-CentOS-$releasever
