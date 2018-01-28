@@ -6,4 +6,4 @@ puppet modules
 
 2018 1/27 add initial puppet cluster script
  
-2018 1/28 add yum repository script
+2018 1/28 add yum repository script , 注意：执行后需要签证：puppet cert list --all; puppet cert sign --all
