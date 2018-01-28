@@ -6,7 +6,7 @@ rpm -q facter &> /dev/null || yum -y -d 0 -e 0 install facter &> /dev/null
 master_ip=$(facter -p | grep 'ipaddress\>' | awk '{print $3}')
 master_fqdn='master.magedu.com'
 \cp files/hosts /etc/hosts
-\cp files/puppet.conf /etc/puppet/puppet.conf
+\cp -f files/puppet.conf /etc/puppet/puppet.conf
 
 [ ! -s puppet_member ] && echo -e "Input all puppet cluster members to \033[32m`pwd`/puppet_member\033[0m file" && exit 0
 while read line; do
