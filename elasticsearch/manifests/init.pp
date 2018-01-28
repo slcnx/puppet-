@@ -3,20 +3,19 @@ class elasticsearch {
 	package{$packages:
 	 	ensure	=>	installed,
 	} ->
-
-	exec{'ela':
-		command	=>	'yum install -y https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-6.1.2.rpm',
-		path	=>	'/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin:/root/bin',
-		unless  =>      'rpm -q elasticsearch'
+	package{'ela':
+		name	=>	'elasticsearch-5.6.6.rpm',
+	 	ensure	=>	installed,
+		source	=>	"http://172.16.0.1/elasticsearch-5.6.6.rpm",
+		provider => 	rpm,
 	} ->
-	
 	file{'elasticsearch.yml':
 		ensure	=>	file,
 		content	=>	template('elasticsearch/elasticsearch.erb'),
 		path	=> 	'/etc/elasticsearch/elasticsearch.yml',
 		mode	=>	'660',
 		group	=>	'elasticsearch',
-		owner	=>	'root'
+		owner	=>	'root',
 	} ->
 	file{'jvm.options':
 		ensure	=>	file,
@@ -24,7 +23,7 @@ class elasticsearch {
 		path	=> 	'/etc/elasticsearch/jvm.options',
 		mode	=>	'660',
 		group	=>	'elasticsearch',
-		owner	=>	'root'
+		owner	=>	'root',
 	} ->
         file {'script':
                 ensure  =>      file,
@@ -32,7 +31,7 @@ class elasticsearch {
                 path    =>      '/root/create_dir',
                 mode    =>      '755',
                 group   =>      'root',
-                owner   =>      'root'
+                owner   =>      'root',
         } ->
 	exec{'create_dir':
 		command	=>	'/root/create_dir',
