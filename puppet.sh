@@ -36,6 +36,7 @@ else
 fi
 hostnamectl set-hostname ${master_fqdn}
 systemctl restart puppetmaster.service
+systemctl enable puppetmaster.service
 echo OK
 
 echo -e " master is \033[1;31m$master_ip\033[0m"
@@ -56,5 +57,6 @@ for i in $(seq 0 $[${#IP[@]}-1]); do
 	scp /etc/hosts  ${IP[$i]}:/etc/hosts
 	scp /etc/puppet/auth.conf ${IP[$i]}:/etc/puppet/auth.conf
 	ssh ${IP[$i]} 'systemctl restart puppetagent.service'
+	ssh ${IP[$i]} 'systemctl enable puppetagent.service'
 done
 
