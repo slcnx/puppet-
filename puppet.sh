@@ -8,7 +8,8 @@ master_fqdn='master.magedu.com'
 \cp files/hosts /etc/hosts
 \cp -f files/puppet.conf /etc/puppet/puppet.conf
 \cp -f files/auth.conf /etc/puppet/auth.conf
-
+setenforce 0
+iptables -F
 [ ! -s puppet_member ] && echo -e "Input all puppet cluster members to \033[32m`pwd`/puppet_member\033[0m file" && exit 0
 while read line; do
    [ "$line" == "$master_ip" ]  && sed -i "/$line/d" puppet_member && continue
